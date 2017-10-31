@@ -27,7 +27,6 @@ public class playerController : MonoBehaviour {
 		controller.Move(moveDirection * Time.deltaTime);
 	}
 
-
     //Using this to test the dialog box
     void OnTriggerEnter(Collider col){
         if(col.gameObject.tag == "wall"){

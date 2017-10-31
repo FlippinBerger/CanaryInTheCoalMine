@@ -44,6 +44,16 @@ public class TextBoxManager : MonoBehaviour {
         UserInput();
     }
 
+
+    // Called to show the text box on screen
+    public void ShowTextBox(string[] dialog){
+        completeText = dialog;
+        displayText = completeText[textLine];
+        textBox.SetActive(true);
+        active = true;
+        StartCoroutine(ScrollText(displayText));
+    }
+
     // Handles the "ghost writing" of the text in the dialog box
     private IEnumerator ScrollText(string displayText){
         int pos = 0;
@@ -60,24 +70,15 @@ public class TextBoxManager : MonoBehaviour {
         isTyping = false;
         cancelTyping = false;
     }
-
-    // Called to show the text box on screen
-    public void ShowTextBox(string[] dialog){
-        completeText = dialog;
-        displayText = completeText[textLine];
-        textBox.SetActive(true);
-        active = true;
-        StartCoroutine(ScrollText(displayText));
-    }
-
+        
     // Exits the text box
-    void HideTextBox(){
+    private void HideTextBox(){
         textBox.SetActive(false);
         active = false;
         textLine = 0;
     }
 
-    void ShowNextLine(){
+    private void ShowNextLine(){
         HideIndicator();
         ++textLine;
         lineComplete = false;
@@ -90,7 +91,7 @@ public class TextBoxManager : MonoBehaviour {
         }
     }
 
-    void UserInput() {
+    private void UserInput() {
         if (active && Input.GetKeyDown(KeyCode.Space)){
             if (lineComplete)
                 ShowNextLine();
@@ -100,12 +101,12 @@ public class TextBoxManager : MonoBehaviour {
         }
     }
    
-
     // UI functions for the indicator to tell the player they can continue
-    void ShowIndicator(){
+    private void ShowIndicator(){   
+        
     }
 
-    void HideIndicator(){
+    private void HideIndicator(){
         indicator.text = "";
     }
 }
